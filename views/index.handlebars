@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido a la biblioteca</title>
+    <style>
+        /* Contenedor de botones */
+        .button-container {
+            display: flex; 
+            flex-direction: column;
+            gap: 50px; 
+            padding: 7%;
+            align-items: center; 
+        }
+
+        /* Estilos de los botones */
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgb(0, 94, 144);
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            font-size: 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 25%; /* Ancho inicial de los botones */
+        }
+
+        .button-link:hover {
+            background-color: rgb(0, 70, 120);
+        }
+
+        /* Estilos adaptativos para dispositivos móviles */
+        @media (max-width: 768px) {
+            .button-link {
+                width: 80%; /* Ancho mayor para pantallas pequeñas */
+                font-size: 20px; /* Reducir tamaño de la fuente en móviles */
+            }
+
+            h1 {
+                font-size: 35px; /* Reducir el tamaño del encabezado */
+                text-align: center;
+            }
+
+            .button-container {
+                gap: 30px; /* Reducir el espacio entre botones en pantallas pequeñas */
+            }
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="button-container">
+            <h1 style="font-size: 40px;">Seleccione una opción</h1>
+            <a href="/asistencia" class="button-link">Asistencia de alumnos</a>
+            <a href="/notas" class="button-link">Notas de alumnos</a>
+            <a href="/cursos" class="button-link">Cursos</a>
+        </div>
+    </section>
+</body>
+</html>
+
+
+

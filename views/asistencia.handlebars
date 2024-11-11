@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido a la biblioteca</title>
+    <style>
+        
+        .button-container {
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 20px; 
+            padding-left: 7%;
+            padding-right: 7%;
+            justify-items: center; }
+
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgb(0, 94, 144);
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%; 
+        }
+
+        .button-link:hover {
+            background-color: rgb(0, 70, 120);
+        }
+    </style>
+</head>
+<body>
+<section style="padding-left:7%; padding-right:7%; padding-bottom: 2%; padding-top: 2%;">
+
+ <div style="padding-left: 7%;" >
+   <a href="/" style="color: rgb(0, 94, 144); text-decoration: none; display: flex; align-items: center; font-size: 20px;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+    </svg>
+    <span style="margin-left: 5px;">Volver</span>
+</a></div>
+
+        <div style="padding-left: 7%; padding-top: 3%; padding-bottom: 3%;" >
+<h1 style="grid-column: span 3; font-size: 40px;">Asistencia de alumnos por cursos</h1>
+<div style="padding-top:1%"> <a>Seleccione un curso para ver la asistencia de cada alumno</a> </div>
+</div>
+
+        <div class="button-container">
+            
+            <a href="/curso1" class="button-link">Curso 1</a>
+            <a href="/curso2" class="button-link">Curso 2</a>
+            <a href="/curso3" class="button-link">Curso 3</a>
+            <a href="/curso4" class="button-link">Curso 4</a>
+            <a href="/curso5" class="button-link">Curso 5</a>
+            <a href="/curso6" class="button-link">Curso 6</a>
+            <a href="/curso7" class="button-link">Curso 7</a>
+            <a href="/curso8" class="button-link">Curso 8</a>
+            <a href="/curso9" class="button-link">Curso 9</a>
+            <a href="/curso10" class="button-link">Curso 10</a>
+            <a href="/curso11" class="button-link">Curso 11</a>
+         
+        </div>
+    </section>
+</body>
+</html>
+
