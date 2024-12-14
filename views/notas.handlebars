@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Alumnos por Curso</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .accordion-button {
+            background-color: #007BFF;
+            color: white;
+            padding: 18px;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .accordion-button:hover {
+            background-color: #0056b3;
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            display: none;
+        }
+
+        :target {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <section class="content">
+        <a href="#curso1" class="accordion-button">Curso 1</a>
+        <div id="curso1" class="panel">
+            <ul>
+            {{#each alumnos}}
+                <li>{{this.nombrealumno}}</li>
+            {{/each}}
+        </ul>
+        </div>
+
+        <a href="#curso2" class="accordion-button">Curso 2</a>
+        <div id="curso2" class="panel">
+            <ul>
+                <li>Alumno 4</li>
+                <li>Alumno 5</li>
+                <li>Alumno 6</li>
+            </ul>
+        </div>
+
+        <!-- Repite para más cursos según sea necesario -->
+    </section>
+</body>
+</html>
+
+       
+
