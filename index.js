@@ -92,31 +92,33 @@ app.get('/mediaasis', (req, res) => {
 })
 
 app.get('/consultaralumno', (req, res) => {
-    res.render('consultaralmuno');
+    res.render('consultaralumno');
 })
 
-app.post('/filtro_alumno', async (req, res) => {
-    const { alumno } = req.body;
+app.post('/consultar_alumno', async (req, res) => {
+    const { alumno } = req.body; // Captura el nombre del alumno desde el formulario
     try {
-        
         const result = await sql`
-            SELECT l.*, j.cantidad, l.paginas, a.nombre AS autor_nombre,gl.tipo AS nombre_genero, e.nombre AS editorial_nombre, s.nombre AS seccion_nombre
-            FROM libro l
-            JOIN ejemplares j ON l.id_libro = j.id_libro
-            JOIN autor a ON l.id_autor = a.id_autor
-            JOIN editorial e ON l.id_editorial = e.id_editorial
-            JOIN se_ubica su ON l.id_libro = su.id_libro  -- Relación entre libro y se_ubica
-            JOIN seccion s ON su.id_seccion = s.id_seccion  -- Relación entre se_ubica y seccion
-            JOIN genero_l gl ON l.id_libro = gl.id_libro
-            WHERE s.nombre ILIKE ${'%' + seccion + '%'}  -- Filtra por sección
+            SELECT alumno_nombre, curso, promedio
+            FROM notasalumnosmedia
+            WHERE alumno_nombre ILIKE ${'%' + alumno + '%'}
+            
+            UNION
+            
+            SELECT alumno_nombre, curso, promedio
+            FROM notasalumnosbasica
+            WHERE alumno_nombre ILIKE ${'%' + alumno + '%'}
         `;
-  
-        res.render('consultaralmuno', { libros: result, alumno });
+
+        res.render('buscaralumno', { alumnos: result, alumno });
     } catch (err) {
-        console.error('Error al filtrar libros por sección:', err);
-        res.status(500).send('Error al filtrar libros por sección');
+        console.error('Error al consultar el nombre del alumno:', err);
+        res.status(500).send('Error al consultar el nombre del alumno');
     }
 });
 
-const port = process.env.PORT || 3000;
+
+
+
+const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port}`));

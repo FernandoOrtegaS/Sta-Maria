@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Alumno</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f4f4f9;
+            min-height: 100vh;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            width: 300px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Formulario -->
+    <form action="/consultar_alumno" method="POST">
+        <h2>Buscar Alumno</h2>
+        <label for="alumno">Nombre del Alumno:</label>
+        <input type="text" id="alumno" name="alumno" placeholder="Escribe el nombre del alumno" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    <!-- Resultados de la consulta -->
+    {{#if alumnos}}
+        <h1>Resultados de la Consulta</h1>
+        <p>Resultados para el alumno: <strong>{{alumno}}</strong></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre del Alumno</th>
+                    <th>Curso</th>
+                    <th>Promedio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each alumnos}}
+                    <tr>
+                        <td>{{this.nombre_alumno}}</td>
+                        <td>{{this.curso}}</td>
+                        <td>{{this.promedio}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{else}}
+        <p>No se encontraron resultados para el alumno: <strong>{{alumno}}</strong></p>
+    {{/if}}
+</body>
+</html>
