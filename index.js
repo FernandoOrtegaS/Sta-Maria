@@ -7,6 +7,7 @@ const sql = neon('postgresql://neondb_owner:HL5t9kjbCpEa@ep-winter-scene-a5bjck6
 
 const app = express();
 
+app.use(express.static('public'));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -17,6 +18,12 @@ app.set('views', './views');
 
 app.use('/images', express.static('images'));
 app.use(express.static('public'));
+
+const context = {
+    pf: 5.4, // Promedio real
+    showWarning: 5.4 < 6, // Mostrar advertencia si es menor a 6
+};
+
 
 app.get('/', async (req, res) => {
     res.render('index');
@@ -36,7 +43,7 @@ app.get('/notas', async (req, res) => {
         
         const result = await sql`
             SELECT * 
-            FROM notasalumnos 
+            FROM notasalumnosbasica 
         `;
   
         if (result.length > 0) {
@@ -50,17 +57,31 @@ app.get('/notas', async (req, res) => {
     }
   });
 
+  app.get('/media', (req, res) => {
+    res.render('media');
+})
+app.get('/basica', (req, res) => {
+    res.render('basica');
+})
+
+app.get('/curso/:id',context, async (req, res) => {
+    const cursoId = req.params.id;
+    try {
+        const result = await sql`
+            SELECT * 
+            FROM notasalumnosbasica
+            WHERE curso_id = ${cursoId}
+        `;
+        res.render('notascurso', { alumnos: result, curso: `Curso ${cursoId}` });
+    } catch (err) {
+        console.error('Error al obtener las notas:', err);
+        res.status(500).send('Error al obtener las notas');
+    }
+});
 
 
 
 
 
-
-
-
-
-const port = process.env.PORT || 3003;
+const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port}`));
-
-
-

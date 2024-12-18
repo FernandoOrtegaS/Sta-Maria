@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas del {{curso}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 80%;
+            margin: 2rem auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: rgb(0, 56, 104);
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 2rem;
+            color: rgb(0, 56, 104);
+        }
+        p {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <section style="padding-left:7%; padding-right:7%; padding-bottom: 2%; padding-top: 2%;">
+<div style="padding-left: 7%;">
+   <a href="/" style="color: rgb(0, 56, 104); text-decoration: none; display: inline-flex; align-items: center; font-size: 18px; font-family: Georgia, 'Times New Roman', Times, serif;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+    </svg>
+    <span style="margin-left: 5px;">Volver</span>
+</a></div>
+ </section>
+
+      <h1> {{c.nombre}}{{c.letra}} </h1> 
+    {{#if alumnos.length}}
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre Alumno</th>
+                <th>Lenguaje</th>
+                <th>Inglés</th>
+                <th>Matemática</th>
+                <th>Ciencias</th>
+                <th>Historia</th>
+                <th>Música</th>
+                <th>Tecnología</th>
+                <th>Visuales</th>
+                <th>Ed. Física</th>
+                <th>FCC</th>
+                <th>P.F.</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each alumnos}}
+            <tr>
+                <td>{{this.alumno_nombre}}</td>
+                <td>{{this.lenguaje}}</td>
+                <td>{{this.ingles}}</td>
+                <td>{{this.matematica}}</td>
+                <td>{{this.ciencias}}</td>
+                <td>{{this.historia}}</td>
+                <td>{{this.musica}}</td>
+                <td>{{this.tecnologia}}</td>
+                <td>{{this.visuales}}</td>
+                <td>{{this.ed_fisica}}</td>
+                <td>{{this.fcc}}</td>
+                <td>{{this.pf}}</td>
+                
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <p>No hay notas disponibles para este curso.</p>
+    {{/if}}
+</body>
+</html>
