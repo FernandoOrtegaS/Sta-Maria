@@ -64,7 +64,7 @@ app.get('/basica', (req, res) => {
     res.render('basica');
 })
 
-app.get('/curso/:id',context, async (req, res) => {
+app.get('/curso/:id', async (req, res) => {
     const cursoId = req.params.id;
     try {
         const result = await sql`
@@ -79,9 +79,44 @@ app.get('/curso/:id',context, async (req, res) => {
     }
 });
 
+app.get('/parvulariaasis', (req, res) => {
+    res.render('parvulariaasist');
+})
 
+app.get('/basicaasis', (req, res) => {
+    res.render('basicaasist');
+})
 
+app.get('/mediaasis', (req, res) => {
+    res.render('mediaasist');
+})
 
+app.get('/consultaralumno', (req, res) => {
+    res.render('consultaralmuno');
+})
+
+app.post('/filtro_alumno', async (req, res) => {
+    const { alumno } = req.body;
+    try {
+        
+        const result = await sql`
+            SELECT l.*, j.cantidad, l.paginas, a.nombre AS autor_nombre,gl.tipo AS nombre_genero, e.nombre AS editorial_nombre, s.nombre AS seccion_nombre
+            FROM libro l
+            JOIN ejemplares j ON l.id_libro = j.id_libro
+            JOIN autor a ON l.id_autor = a.id_autor
+            JOIN editorial e ON l.id_editorial = e.id_editorial
+            JOIN se_ubica su ON l.id_libro = su.id_libro  -- Relación entre libro y se_ubica
+            JOIN seccion s ON su.id_seccion = s.id_seccion  -- Relación entre se_ubica y seccion
+            JOIN genero_l gl ON l.id_libro = gl.id_libro
+            WHERE s.nombre ILIKE ${'%' + seccion + '%'}  -- Filtra por sección
+        `;
+  
+        res.render('consultaralmuno', { libros: result, alumno });
+    } catch (err) {
+        console.error('Error al filtrar libros por sección:', err);
+        res.status(500).send('Error al filtrar libros por sección');
+    }
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port}`));
