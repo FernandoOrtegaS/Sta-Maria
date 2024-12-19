@@ -97,26 +97,59 @@ app.get('/consultaralumno', (req, res) => {
 
 app.post('/consultar_alumno', async (req, res) => {
     const { alumno } = req.body; // Captura el nombre del alumno desde el formulario
+    
     try {
         const result = await sql`
-            SELECT alumno_nombre, curso, promedio
-            FROM notasalumnosmedia
+            SELECT n.alumno_nombre as nombre, c.nombre_curso as curso,c.nivel as nivel,c.letra as letra, n.pf as pf
+            FROM notasalumnosbasica n
+            JOIN curso c ON c.curso_id=n.curso_id
             WHERE alumno_nombre ILIKE ${'%' + alumno + '%'}
             
             UNION
             
-            SELECT alumno_nombre, curso, promedio
-            FROM notasalumnosbasica
+            SELECT n.alumno_nombre, c.nombre_curso,c.nivel,c.letra, n.pf
+            FROM notasalumnosmedia n
+            JOIN curso c ON c.curso_id=n.curso_id
             WHERE alumno_nombre ILIKE ${'%' + alumno + '%'}
         `;
 
-        res.render('buscaralumno', { alumnos: result, alumno });
+        res.render('consultaralumno', { alumnos: result, alumno });
     } catch (err) {
         console.error('Error al consultar el nombre del alumno:', err);
         res.status(500).send('Error al consultar el nombre del alumno');
     }
 });
 
+app.get('/asistencia/:id', async (req, res) => {
+    const cursoId = req.params.id;
+    try {
+        const result = await sql`
+            SELECT * 
+            FROM asistencia
+            WHERE curso_id = ${cursoId}
+        `;
+        res.render('asistenciaalumnos', { alumnos: result, curso: `curso ${cursoId}` });
+    } catch (err) {
+        console.error('Error al obtener la asistencia:', err);
+        res.status(500).send('Error al obtener la asistencia');
+    }
+});
+
+app.get('/cursoasistencia/:id', async (req, res) => {
+    const cursoId = req.params.id;
+    try {
+        const result = await sql`
+            SELECT a.* , c.nombre_curso as curso , c.nivel as nivel , c.letra as letra
+            FROM asistenciaporcurso a
+            JOIN curso c on c.curso_id=a.curso_id
+            WHERE c.curso_id = ${cursoId}
+        `;
+        res.render('asistenciacurso', { alumnos: result, curso: `curso ${cursoId}` });
+    } catch (err) {
+        console.error('Error al obtener la asistencia:', err);
+        res.status(500).send('Error al obtener la asistencia');
+    }
+});
 
 
 

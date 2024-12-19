@@ -14,7 +14,7 @@
             align-items: center;
             justify-content: center;
             background-color: #f4f4f9;
-            min-height: 100vh;
+            
         }
         form {
             background: white;
@@ -51,7 +51,7 @@
         table {
             width: 80%;
             border-collapse: collapse;
-            margin: 20px auto;
+           
         }
         table, th, td {
             border: 1px solid #ddd;
@@ -70,14 +70,17 @@
     </style>
 </head>
 <body>
-    <!-- Formulario -->
+ 
+
+<div style="align-items: center;">
+     <div style="padding-top:20%; aling:center;">  <!-- Formulario -->
     <form action="/consultar_alumno" method="POST">
         <h2>Buscar Alumno</h2>
         <label for="alumno">Nombre del Alumno:</label>
         <input type="text" id="alumno" name="alumno" placeholder="Escribe el nombre del alumno" required>
         <button type="submit">Buscar</button>
     </form>
-
+</div>
     <!-- Resultados de la consulta -->
     {{#if alumnos}}
         <h1>Resultados de la Consulta</h1>
@@ -93,9 +96,9 @@
             <tbody>
                 {{#each alumnos}}
                     <tr>
-                        <td>{{this.nombre_alumno}}</td>
+                        <td>{{this.nombre}}</td>
                         <td>{{this.curso}}</td>
-                        <td>{{this.promedio}}</td>
+                        <td>{{this.pf}}</td>
                     </tr>
                 {{/each}}
             </tbody>
@@ -103,5 +106,6 @@
     {{else}}
         <p>No se encontraron resultados para el alumno: <strong>{{alumno}}</strong></p>
     {{/if}}
+    </div>
 </body>
 </html>
